@@ -10,9 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.navegacion.model.Routes
 import com.example.navegacion.ui.theme.NavegacionTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,10 +29,25 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navigationController = rememberNavController()
-                    NavHost(navController = navigationController , startDestination = "pantalla01"){
-                        composable("pantalla01"){ Screen01(navigationController)}
-                        composable("pantalla02"){ Screen02(navigationController)}
-                        composable("pantalla03"){ Screen03(navigationController)}
+                    NavHost(
+                        navController = navigationController,
+                        startDestination = Routes.Pantalla01.route
+                    ) {
+                        composable(Routes.Pantalla01.route) { Screen01(navigationController) }
+                        composable(Routes.Pantalla02.route) { Screen02(navigationController) }
+                        composable(Routes.Pantalla03.route) { Screen03(navigationController) }
+                        composable("pantalla04/{name}", arguments = listOf(
+                            navArgument("name") {
+                                type = NavType.IntType
+                            }
+                        )
+                        ) { backStackEntry ->
+                            Screen04(
+                                navigationController = navigationController,
+                                name = backStackEntry.arguments?.getInt("name") ?: 0
+                            )
+
+                        }
                     }
 
                 }
