@@ -10,6 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.navegacion.ui.theme.NavegacionTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +25,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    val navigationController = rememberNavController()
+                    NavHost(navController = navigationController , startDestination = "pantalla01"){
+                        composable("pantalla01"){ Screen01(navigationController)}
+                        composable("pantalla02"){ Screen02(navigationController)}
+                        composable("pantalla03"){ Screen03(navigationController)}
+                    }
+
                 }
             }
         }
