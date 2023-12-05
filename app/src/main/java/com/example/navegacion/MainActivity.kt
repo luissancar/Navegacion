@@ -36,15 +36,30 @@ class MainActivity : ComponentActivity() {
                         composable(Routes.Pantalla01.route) { Screen01(navigationController) }
                         composable(Routes.Pantalla02.route) { Screen02(navigationController) }
                         composable(Routes.Pantalla03.route) { Screen03(navigationController) }
-                        composable("pantalla04/{name}", arguments = listOf(
-                            navArgument("name") {
+                        composable(Routes.Pantalla04.route,
+                            arguments = listOf(navArgument("parametro") {
                                 type = NavType.IntType
                             }
-                        )
+                            )
                         ) { backStackEntry ->
                             Screen04(
                                 navigationController = navigationController,
-                                name = backStackEntry.arguments?.getInt("name") ?: 0
+                                parametro = backStackEntry.arguments?.getInt("parametro") ?: 0
+                            )
+
+                        }
+                        composable(
+                            Routes.Pantalla05.route,
+                            arguments = listOf(navArgument("parametroOpcional") {
+                                defaultValue = "Default"
+                            })
+                        )
+
+
+                        { backStackEntry ->
+                            Screen05(
+                                navigationController = navigationController,
+                                parametroOpcional  = backStackEntry.arguments?.getString("parametroOpcional")
                             )
 
                         }
@@ -56,18 +71,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NavegacionTheme {
-        Greeting("Android")
-    }
-}

@@ -3,6 +3,7 @@ package com.example.navegacion
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,21 +57,43 @@ fun Screen03(navigationController: NavHostController) {
     ) {
         Text(text = "Screen03", modifier = Modifier
             .align(Alignment.Center)
-            .clickable { navigationController.navigate("pantalla04/10") })
+            .clickable { navigationController.navigate(Routes.Pantalla04.createRoute(10)) })
     }
 
 }
 
 
 @Composable
-fun Screen04(navigationController: NavHostController, name: Int) {
+fun Screen04(navigationController: NavHostController, parametro: Int) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Gray)
     ) {
+        Column (Modifier.align(Alignment.Center)){
+
+            Text(
+                text = parametro.toString(), modifier = Modifier
+                    .clickable { navigationController.navigate(Routes.Pantalla05.createRoute("Hola")) }
+
+            )
+            Text(text = "Pantalla 5 sin parámetro", modifier = Modifier
+                .clickable { navigationController.navigate("pantalla5") })
+        }
+    }
+
+}
+
+
+@Composable
+fun Screen05(navigationController: NavHostController, parametroOpcional: String?) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Yellow)
+    ) {
         Text(
-            text = name.toString(), modifier = Modifier
+            text = parametroOpcional.toString(), modifier = Modifier
                 .align(Alignment.Center)
         )
     }
