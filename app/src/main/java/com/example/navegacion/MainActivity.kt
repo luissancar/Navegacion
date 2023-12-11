@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
                         navController = navigationController,
                         startDestination = Routes.Pantalla01.route
                     ) {
+                        composable("pantalla02") { Screen02(navigationController)}
                         composable(Routes.Pantalla01.route) { Screen01(navigationController) }
                         composable(Routes.Pantalla02.route) { Screen02(navigationController) }
                         composable(Routes.Pantalla03.route) { Screen03(navigationController) }

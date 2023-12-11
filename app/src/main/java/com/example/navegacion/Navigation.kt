@@ -24,7 +24,8 @@ fun Screen01(navigationController: NavHostController) {
             .align(Alignment.Center)
             .clickable
             {
-                navigationController.navigate(Routes.Pantalla02.route)
+               // navigationController.navigate(Routes.Pantalla02.route)
+                navigationController.navigate("pantalla02")
             }
         )
     }
